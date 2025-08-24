@@ -17,23 +17,24 @@ Identificación de actividad sospechosa:
 Concéntrese en identificar eventos que puedan indicar actividad sospechosa, como intentos de inicio de sesión inusuales o cambios de configuración no autorizados. 🚨
 
 Documente los criterios que utiliza para identificar estos eventos.
+
+
 2. Correlación de procesos activos con conexiones de red
 Lista de procesos activos:
-
-Use PowerShell para enumerar los procesos activos junto con sus rutas de ejecución. 🏃‍♂️
-
+Use PowerShell para enumerar los procesos activos junto con sus rutas de ejecución. 
 El cmdlet 'Get-Process' será útil aquí.
+
+
 Identificación de conexiones a Internet:
-
 Identificar qué procesos tienen conexiones a Internet activas. 🌐
-
 Use cmdlets como "Get-NetTCPConnection" y "netstat" para recopilar esta información.
+
+
 Obtención de información de conexión:
-
 Recopile detalles sobre puertos abiertos y conexiones remotas. 🔌
-
 Correlacione cada conexión con el proceso de origen para comprender la relación entre los procesos y la actividad de la red.
 Detección de procesos sospechosos:
+
 
 Busque procesos que carezcan de firma digital o que se ejecuten desde ubicaciones sospechosas. 
 
