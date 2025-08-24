@@ -1,7 +1,6 @@
-#Crea un diccionario, en el cual la clave es el # de proceso y el valor contiene una lista con el nombre del proceso y ruta. 
 $cont=1
 $procesos=Get-Process
-$dicc = New-Object System.Collections.Generic.Dictionary"[Int,String]" 
+$dicc = New-Object System.Collections.Generic.Dictionary"[Int,System.Collections.Generic.List[String]]" 
 
 $procesos | ForEach-Object{
     $List = New-Object System.Collections.Generic.List[string]
@@ -11,4 +10,7 @@ $procesos | ForEach-Object{
     $cont++
 }
 
-$dicc
+#Obtener Procesos Así
+$dicc[1] #Te da el primer proceso guardado. 
+$dicc[1][0] #Te da el nombre del primer proceso guardado
+$dicc[1][1] #Te da la ruta del primer proceso guardado 
