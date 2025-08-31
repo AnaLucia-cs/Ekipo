@@ -53,7 +53,7 @@ Write-Host -BackgroundColor DarkCyan -ForegroundColor White "Direcciones IP remo
 $ipsRemotas
 
 # 7. Configuración de API
-$apiKey = "2fcd6bcb2cd87e864ee765895836353034768a893f5c1f4374aae1251de87102de32fe8f79fbb4b2"  # ← Reemplaza con tu clave real
+$apiKey = "AQUI_TU_API_KEY"  # ← Reemplaza con tu clave real
 $endpoint = "https://api.abuseipdb.com/api/v2/check"
 
 # 8. Función para consultar reputación
@@ -97,3 +97,4 @@ $reputacionIPs | Select-Object IP, AbusoScore, País, ISP, ÚltimoReporte,
     elseif ($_.AbusoScore -ge 40) {"Medio ⚠️"}
     else {"Bajo ✅"}
 }} | Format-Table -AutoSize
+
