@@ -33,9 +33,9 @@ Use cmdlets como "Get-NetTCPConnection" y "netstat" para recopilar esta informac
 Obtención de información de conexión:
 Recopile detalles sobre puertos abiertos y conexiones remotas. 🔌
 Correlacione cada conexión con el proceso de origen para comprender la relación entre los procesos y la actividad de la red.
+
+
 Detección de procesos sospechosos:
-
-
 Busque procesos que carezcan de firma digital o que se ejecuten desde ubicaciones sospechosas. 
 
 Documente sus hallazgos y los métodos utilizados para identificar estos procesos.
