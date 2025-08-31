@@ -1,0 +1,44 @@
+#Obtener procesos activos
+$procesosAct=Get-Process 
+Write-Host -BackgroundColor Cyan -ForegroundColor Black "Lista de procesos activos"
+$procesosAct | ForEach-Object {$index=0} {$_; $index++} | Format-Table -Property @{ Label="#"; Expression={$index}}, Name, Id, Path -AutoSize
+
+
+#Obtiene los PIDS de los procesos conectados a internet
+$pidsConectados = Get-NetTCPConnection -State Established | Select-Object -ExpandProperty OwningProcess 
+
+#Checa si el Id de cada proceso está en el arreglo de PIDS y los guarda en un objeto
+$procesosInternet = $procesosAct | Where-Object { $_.Id -in $pidsConectados }
+#Muestra los procesos activos a Internet
+Write-Host -BackgroundColor Green -ForegroundColor Black "Procesos conenctados a internet"
+$procesosInternet | Format-Table ProcessName, Id, Path -AutoSize
+
+
+#Obtención de información de coneción 
+$net=Get-NetTCPConnection -State Established | Select-Object LocalPort, RemoteAddress, RemotePort, OwningProcess
+
+$procesosNetInfo = foreach ($conexion in $net){
+    $proceso= $procesosInternet | Where-Object { $_.Id -eq $conexion.OwningProcess}
+    if ($proceso) {
+        [PSCustomObject]@{
+            ProcessName = $proceso.ProcessName
+            ID = $proceso.Id
+            Path = $proceso.Path
+            LocalPort = $conexion.LocalPort
+            RemoteAddress = $conexion.RemoteAddress
+            RemotePort = $conexion.RemotePort
+        }
+    }
+}
+$procesosNetInfo | Format-Table -AutoSize
+
+#Comprobar firmas digitaldes de procesos activos
+Write-Host -BackgroundColor Magenta -ForegroundColor Black "Combrobación de firmas digitales de procesos activos conectados"
+$procesosInternet | ForEach-Object{
+    if (Get-AuthenticodeSignature $_.Path){
+        Write-Host "$($_.ProcessName) cuenta con firma digital ✔️"
+    }else{
+        Write-Host "$($_.ProcessName) NO cuenta con firma digital 🚨🚨🚨"
+    } 
+}
+
