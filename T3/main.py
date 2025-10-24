@@ -110,9 +110,10 @@ def main():
     Es necesario contar con autorización firmada del propietario del dominio para continuar.
     De no tenerlo y continuar habrá repercusiones legales.""")
 
+    logging.warning(f"El usuario {usuario} accedió al script")
+
     if verificador == "Aceptar":
         repeat=True
-        logging.warning(f"El usuario {usuario} accedió al script")
         menu(repeat, usuario) 
 
     else:
