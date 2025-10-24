@@ -28,42 +28,38 @@ def aviso(mensaje:str):
     return verificador
 
 #Invoca al menú
-def menu():
+def menu(repeat, usuario):
     while repeat:
-            op=input("""\nSeleccione la actividad que desea realizar
-        1. Ejecutar tareas pasivas
-        2. Ejecutar tareas activas (REQUIERE AUTORIZACIÓN)
-        3. Salir
+        op=input("""\nSeleccione la actividad que desea realizar
+    1. Ejecutar tareas pasivas
+    2. Ejecutar tareas activas (REQUIERE AUTORIZACIÓN)
+    3. Salir
 
-        Ingrese una opción: """)
-
-            if op=='1':
-                print("\nRealizar atividades pasivas")
-                repetir(repeat)
+    Ingrese una opción: """)
+        if op=='1':
+            actPasivas()
+            repetir(repeat,usuario)
+        
+        elif op=='2':
+            actActivas(host)
+            repetir(repeat,usuario)
             
-            elif op=='2':
-                actActivas(host)
-                repetir(repeat)
-                
-            elif op=='3':
-                logging.warning(f"El usuario {usuario} salió del script.")
-                print("Saliendo...")
-                sys.exit()
-            else:
-                print("Opción no válida.")
+        elif op=='3':
+           salir(usuario)
+        else:
+            print("Opción no válida.")
 
-#Control while
-def repetir(r):
+#Control while del menú
+def repetir(r,usr):
     print("\n¿Desea volver al menú?")
     r=input("y/n :").lower()
-    if r.strip() =="y":
+    if r.strip() == "y":
         r=True
     else:
         r=False
-        print("Saliendo...")
-        logging.warning(f"El usuario {usuario} salió del script.")
-        sys.exit()
+        salir(usr)     
 
+#Invoca tareas activas
 def actActivas(host):
 
     print(f"Verificando la conexión al host {host}...")
@@ -96,24 +92,31 @@ def actActivas(host):
     except Exception as e:
         print("Ocurrió un error en el escaneo")
 
+#Invoca tareas pasivas
+def actPasivas():
+    print("aqui tu chamba Ana")
 
-
-
-usuario=obtencion_usr()
-verificador=aviso("""Este script realiza actividades de recolección de información y escaneo limitado de puertos al host scanme.nmap.org.
-Queda terminantemente prohibida la explotación, modificación de servicios o exfiltración de datos.
-Es necesario contar con autorización firmada del propietario del dominio para continuar.
-De no tenerlo y continuar habrá repercusiones legales.""")
-
-if verificador == "Aceptar":
-    repeat=True
-    logging.warning(f"El usuario {usuario} accedió al script")
-    menu()    
-
-else:
-    logging.warning(f"El usuario {usuario} ejecutó el script pero salió.")
+#Salir script y registrar en log
+def salir(usr):
+    print("Saliendo...")
+    logging.warning(f"El usuario {usr} salió del script.")
     sys.exit()
 
+#Control principal del flujo
+def main():
+    usuario=obtencion_usr()
+    verificador=aviso("""Este script realiza actividades de recolección de información y escaneo limitado de puertos al host scanme.nmap.org.
+    Queda terminantemente prohibida la explotación, modificación de servicios o exfiltración de datos.
+    Es necesario contar con autorización firmada del propietario del dominio para continuar.
+    De no tenerlo y continuar habrá repercusiones legales.""")
 
+    if verificador == "Aceptar":
+        repeat=True
+        logging.warning(f"El usuario {usuario} accedió al script")
+        menu(repeat, usuario) 
 
-print("Esto nunca debería imprimirse")
+    else:
+        salir(usuario)
+
+#Invoca al módulo principal
+main()
