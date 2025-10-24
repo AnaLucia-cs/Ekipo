@@ -61,7 +61,6 @@ def repetir(r,usr):
 
 #Invoca tareas activas
 def actActivas(host):
-
     print(f"Verificando la conexión al host {host}...")
     try:
         hacer_ping = subprocess.run(["wsl", "ping", "-c", "2", host], capture_output=True, text=True)
