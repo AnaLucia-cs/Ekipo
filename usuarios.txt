@@ -1,9 +1,0 @@
-juan:1234
-maria:qwerty
-pedro:abc123
-sofia:pass2025
-carlos:linux
-ana:123456
-:sinusuario
-roberto:
-miguel:claveSegura
