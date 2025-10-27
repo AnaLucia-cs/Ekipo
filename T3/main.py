@@ -93,7 +93,67 @@ def actActivas(host):
 
 #Invoca tareas pasivas
 def actPasivas():
-    print("aqui tu chamba Ana")
+    def actPasivas():
+    print("--- TAREAS PASIVAS ---")
+    dominio = input("Ingresa el dominio o URL (Enter usa el host por defecto): ").strip()
+    if dominio == "":
+        dominio = host  # si no pone usa el que esta por defecto
+    print(f"Analizando: {dominio}")
+
+    resultados = {}
+    resultados["dominio"] = dominio
+    resultados["fecha"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    # -----DNS-----
+    print("Consultando DNS...")
+    dns_data = {}
+    tipos = ["A", "MX", "NS", "TXT"]
+    for tipo in tipos:
+        try:
+            respuesta = dns.resolver.resolve(dominio, tipo)
+            dns_data[tipo] = [r.to_text() for r in respuesta]
+        except Exception as e:
+            dns_data[tipo] = f"Error: {e}"
+    resultados["dns"] = dns_data
+
+    # -----WHOIS-----
+    print("Consultando WHOIS...")
+    try:
+        info = whois.whois(dominio)
+        resultados["whois"] = {k: str(v) for k, v in info.items()}
+    except Exception as e:
+        resultados["whois"] = {"error": str(e)}
+
+    # -----Subdominios-----
+    print("Buscando subdominios...")
+    subdominios = []
+    try:
+        url = f"https://crt.sh/?q=%25.{dominio}&output=json"
+        r = requests.get(url, timeout=10)
+        if r.status_code == 200:
+            datos = r.json()
+            for d in datos:
+                nombre = d.get("name_value", "")
+                for linea in nombre.split("\n"):
+                    if dominio in linea and linea not in subdominios:
+                        subdominios.append(linea.replace("*.", ""))
+    except Exception as e:
+        subdominios.append(f"Error: {e}")
+    resultados["subdominios"] = subdominios
+
+    # ----- Guardar ------
+    fecha = datetime.now().strftime("%Y%m%d_%H%M%S")
+    txt_file = f"{dominio}_datos_crudos_{fecha}.txt"
+
+    try:
+        with open(txt_file, "w", encoding="utf-8") as f:
+            f.write("=== DATOS CRUDOS DE RECOLECCIÓN ===\n")
+            f.write(json.dumps(resultados, indent=4))
+        print(f"Datos crudos guardados en: {txt_file}")
+    except Exception as e:
+        print("Error guardando archivo TXT:", e)
+
+    print("--- Tareas pasivas finalizadas ---")
 
 #Salir script y registrar en log
 def salir(usr):
