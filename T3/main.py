@@ -93,7 +93,6 @@ def actActivas(host):
 
 #Invoca tareas pasivas
 def actPasivas():
-    def actPasivas():
     print("--- TAREAS PASIVAS ---")
     dominio = input("Ingresa el dominio o URL (Enter usa el host por defecto): ").strip()
     if dominio == "":

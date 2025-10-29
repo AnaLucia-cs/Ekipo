@@ -26,3 +26,19 @@
 2025-10-24 16:23:14,160 - WARNING - El usuario nana salió del script.
 2025-10-24 16:23:39,064 - WARNING - El usuario nana accedió al script
 2025-10-24 16:23:42,066 - WARNING - El usuario nana salió del script.
+2025-10-29 14:25:13,407 - WARNING - El usuario  accedió al script
+2025-10-29 14:25:21,587 - INFO - El usuario  inició tareas activas.
+2025-10-29 14:32:43,520 - WARNING - El usuario nana accedió al script
+2025-10-29 14:32:46,699 - INFO - El usuario nana inició tareas pasivas.
+2025-10-29 14:32:51,736 - INFO - El usuario nana inició tareas activas.
+2025-10-29 14:33:02,719 - INFO - El usuario confirmó contar con autorización para tareas activas.
+2025-10-29 14:33:14,534 - INFO - Escaneo al host scanme.nmap.org terminado exitosamente.
+2025-10-29 14:33:19,875 - WARNING - El usuario nana salió del script.
+2025-10-29 14:38:55,281 - WARNING - El usuario nana accedió al script
+2025-10-29 14:38:55,287 - INFO - El usuario nana salió del script.
+2025-10-29 14:39:25,297 - WARNING - El usuario nana accedió al script
+2025-10-29 14:39:30,786 - INFO - El usuario nana inició tareas pasivas.
+2025-10-29 14:39:35,050 - INFO - El usuario nana inició tareas activas.
+2025-10-29 14:39:47,338 - INFO - El usuario confirmó contar con autorización para tareas activas.
+2025-10-29 14:40:00,715 - INFO - Escaneo al host scanme.nmap.org terminado exitosamente.
+2025-10-29 14:40:09,359 - INFO - El usuario nana salió del script.
