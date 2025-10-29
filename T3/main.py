@@ -3,6 +3,11 @@ import sys
 import logging
 import pyautogui as py
 import nmap
+import json
+import dns.resolver
+import whois
+import requests
+from datetime import datetime
 
 #VARIABLES
 host="scanme.nmap.org"
