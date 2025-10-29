@@ -42,3 +42,11 @@
 2025-10-29 14:39:47,338 - INFO - El usuario confirmó contar con autorización para tareas activas.
 2025-10-29 14:40:00,715 - INFO - Escaneo al host scanme.nmap.org terminado exitosamente.
 2025-10-29 14:40:09,359 - INFO - El usuario nana salió del script.
+2025-10-29 14:49:44,193 - WARNING - El usuario nana accedió al script
+2025-10-29 14:50:09,953 - DEBUG - Starting new HTTPS connection (1): crt.sh:443
+2025-10-29 14:50:11,711 - DEBUG - https://crt.sh:443 "GET /?q=%25.scanme.nmap.org&output=json HTTP/1.1" 200 2
+2025-10-29 14:50:50,182 - WARNING - El usuario intentó ejecutar tareas activas sin autorización.
+2025-10-29 14:51:00,657 - WARNING - El usuario intentó ejecutar tareas activas sin autorización.
+2025-10-29 14:51:05,445 - INFO - El usuario confirmó contar con autorización para tareas activas.
+2025-10-29 14:51:20,437 - INFO - Escaneo al host scanme.nmap.org terminado exitosamente.
+2025-10-29 14:51:27,909 - INFO - El usuario nana salió del script.

@@ -66,35 +66,57 @@ def repetir(r,usr):
 
 #Invoca tareas activas
 def actActivas(host):
-    print(f"Verificando la conexión al host {host}...")
-    try:
-        hacer_ping = subprocess.run(["wsl", "ping", "-c", "2", host], capture_output=True, text=True)
+    a=aviso("Para ejecutar tareas activas, debe contar con autorización firmada del propietario del dominio.\n¿Cuenta con dicha autorización?")
 
-        if (hacer_ping.returncode !=0 ):
-            print(f"El host {host} no pudo ser accedido.")
-            sys.exit(hacer_ping.returncode)  
-    except:
-        print(f"Fallo al realizar ping al host {host}")
-        sys.exit(1)
+    if a=="Aceptar":
+        a=aviso("Nuestro personal se pondrá en contacto para asegurarse que es un usuario autorizado ¿Está seguro de contar con la autorización necesaria para continuar? De no tenerla, habrá repercusiones legales.")
+        if a=="Aceptar":
+            print("Continuando con tareas activas...")
+            logging.info("El usuario confirmó contar con autorización para tareas activas.")
+            print(f"Verificando la conexión al host {host}...")
+            try:
+                hacer_ping = subprocess.run(["wsl", "ping", "-c", "2", host], capture_output=True, text=True)
 
-    print("Conexión exitosa")
-    try:
-        #Empezar el escaneo de puertos del host
-        print("Escaneando puertos...")
-        cuidar_puertos="21,22,23,25,3306,54,8080,8443,80,443"
-        
-        escanear = subprocess.run(["wsl", "nmap","-sV", "-p",cuidar_puertos,"--script","http-headers,http-title,ssl-cert", host], capture_output=True, text=True)
-        print(escanear.stdout)
+                if (hacer_ping.returncode !=0 ):
+                    print(f"El host {host} no pudo ser accedido.")
+                    sys.exit(hacer_ping.returncode)  
+                    logging.error(f"El host {host} no pudo ser accedido.")
+            except:
+                print(f"Fallo al realizar ping al host {host}")
+                logging.error(f"Fallo al realizar ping al host {host}")
+                sys.exit(1)
 
-        with open(results_path, "w") as external_file:
-            print(escanear.stdout, file=external_file)
-            external_file.close()
-            
-    # print(escanear.returncode)
-        print("Escaneo terminado.")
+            print("Conexión exitosa")
+            try:
+                #Empezar el escaneo de puertos del host
+                print("Escaneando puertos...")
+                cuidar_puertos="21,22,23,25,3306,54,8080,8443,80,443"
+                
+                escanear = subprocess.run(["wsl", "nmap","-sV", "-p",cuidar_puertos,"--script","http-headers,http-title,ssl-cert", host], capture_output=True, text=True)
+                print(escanear.stdout)
 
-    except Exception as e:
-        print("Ocurrió un error en el escaneo")
+                with open(results_path, "w") as external_file:
+                    print(escanear.stdout, file=external_file)
+                    external_file.close()
+                    
+            # print(escanear.returncode)
+                print("Escaneo terminado.")
+                logging.info(f"Escaneo al host {host} terminado exitosamente.")
+
+            except Exception as e:
+                print("Ocurrió un error en el escaneo")
+                logging.error(f"Ocurrió un error en el escaneo al host {host}: {e}")
+
+        else:
+            print("No se cuenta con autorización. Saliendo de tareas activas.")
+            logging.warning("El usuario intentó ejecutar tareas activas sin autorización.")
+            return
+
+
+    else:
+        print("No se cuenta con autorización. Saliendo de tareas activas.")
+        logging.warning("El usuario intentó ejecutar tareas activas sin autorización.")
+        return
 
 #Invoca tareas pasivas
 def actPasivas():
@@ -162,7 +184,7 @@ def actPasivas():
 #Salir script y registrar en log
 def salir(usr):
     print("Saliendo...")
-    logging.warning(f"El usuario {usr} salió del script.")
+    logging.info(f"El usuario {usr} salió del script.")
     sys.exit()
 
 #Control principal del flujo
