@@ -4,6 +4,7 @@ import logging
 import pyautogui as py
 import nmap
 import json
+import csv
 import dns.resolver
 import whois
 import requests
@@ -169,17 +170,37 @@ def actPasivas():
 
     # ----- Guardar ------
     fecha = datetime.now().strftime("%Y%m%d_%H%M%S")
-    txt_file = f"{dominio}_datos_crudos_{fecha}.txt"
+    json_file = f"{dominio}_datos_crudos_{fecha}.json"
+    csv_file = f"{dominio}_datos_crudos_{fecha}.csv"
 
+    #------- Guardar JSON --------
     try:
-        with open(txt_file, "w", encoding="utf-8") as f:
-            f.write("=== DATOS CRUDOS DE RECOLECCIÓN ===\n")
-            f.write(json.dumps(resultados, indent=4))
-        print(f"Datos crudos guardados en: {txt_file}")
+        with open(json_file, "w", encoding="utf-8") as f:
+            json.dump(resultados, f, indent=4, ensure_ascii=False)
+        print(f"Datos crudos guardados en: {json_file}")
     except Exception as e:
-        print("Error guardando archivo TXT:", e)
+        print("Error guardando archivo JSON:", e)
 
-    print("--- Tareas pasivas finalizadas ---")
+#------- Guardar CSV ------------
+    try:
+        import csv
+        with open(csv_file, "w", encoding="utf-8", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerow(["Campo", "Valor"])
+            writer.writerow(["Dominio", resultados["dominio"]])
+            writer.writerow(["Fecha", resultados["fecha"]])
+            writer.writerow(["--- DNS ---", ""])
+            for tipo, valores in resultados["dns"].items():
+                writer.writerow([tipo, valores])
+            writer.writerow(["--- WHOIS ---", ""])
+            for k, v in resultados["whois"].items():
+                writer.writerow([k, v])
+            writer.writerow(["--- SUBDOMINIOS ---", ""])
+            for sub in resultados["subdominios"]:
+                writer.writerow(["Subdominio", sub])
+        print(f"Datos crudos guardados en: {csv_file}")
+    except Exception as e:
+        print("Error guardando archivo CSV:", e)
 
 #Salir script y registrar en log
 def salir(usr):
