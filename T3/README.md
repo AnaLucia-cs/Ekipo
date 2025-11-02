@@ -41,5 +41,6 @@ Una vez que se habilite el modo activo, el script mostrará un mensaje de advert
 -----
 
 ## Autores
+anaslzr
 
 
