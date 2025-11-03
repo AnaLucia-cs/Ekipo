@@ -1,0 +1,39 @@
+{
+    "dominio": "scanme.nmap.org",
+    "fecha": "2025-11-02 18:53:24",
+    "dns": {
+        "A": [
+            "45.33.32.156"
+        ],
+        "MX": "Error: The DNS response does not contain an answer to the question: scanme.nmap.org. IN MX",
+        "NS": "Error: The DNS response does not contain an answer to the question: scanme.nmap.org. IN NS",
+        "TXT": "Error: The DNS response does not contain an answer to the question: scanme.nmap.org. IN TXT"
+    },
+    "whois": {
+        "domain_name": "nmap.org",
+        "registrar": "DYNADOT LLC",
+        "registrar_url": "http://www.dynadot.com",
+        "reseller": "None",
+        "whois_server": "whois.dynadot.com",
+        "referral_url": "None",
+        "updated_date": "[datetime.datetime(2023, 8, 31, 5, 5, 15, tzinfo=tzoffset('UTC', 0)), datetime.datetime(2023, 8, 26, 5, 16, 38, tzinfo=tzoffset('UTC', 0))]",
+        "creation_date": "1999-01-18 05:00:00+00:00",
+        "expiration_date": "2029-01-18 05:00:00+00:00",
+        "name_servers": "['ns1.linode.com', 'ns2.linode.com', 'ns3.linode.com', 'ns4.linode.com', 'ns5.linode.com']",
+        "status": "clientTransferProhibited https://icann.org/epp#clientTransferProhibited",
+        "emails": "abuse@dynadot.com",
+        "dnssec": "unsigned",
+        "name": "REDACTED FOR PRIVACY",
+        "org": "Super Privacy Service LTD c/o Dynadot",
+        "address": "PO Box 701",
+        "city": "San Mateo",
+        "state": "California",
+        "registrant_postal_code": "94401",
+        "country": "US",
+        "tech_name": "REDACTED FOR PRIVACY",
+        "tech_org": "Super Privacy Service LTD c/o Dynadot",
+        "admin_name": "REDACTED FOR PRIVACY",
+        "admin_org": "Super Privacy Service LTD c/o Dynadot"
+    },
+    "subdominios": []
+}
