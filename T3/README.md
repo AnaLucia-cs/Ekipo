@@ -25,8 +25,8 @@ También se emplean módulos estándar como datetime, logging, json, y subproces
 -----
 
 ## Ejecución
-
-
+chmod +x main.py
+./main.py
 -----
 
 ## Modo Activo (nmap)
