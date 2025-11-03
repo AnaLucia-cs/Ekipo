@@ -45,4 +45,4 @@ Una vez que se habilite el modo activo, el script mostrará un mensaje de advert
 ## Autores
 anaslzr
 iza-0L1N
-
+AnaLucia-cs
